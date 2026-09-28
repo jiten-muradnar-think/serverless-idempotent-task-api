@@ -1,0 +1,48 @@
+{
+  "name": "serverless-idempotent-task-api",
+  "version": "1.0.0",
+  "description": "Multi-tenant serverless task API with idempotent creation under concurrency. TypeScript, AWS Lambda, DynamoDB, AWS CDK.",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "cdk": "cdk",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:watch": "jest --watch",
+    "verify": "npm run lint && npm run format:check && npm run typecheck && npm test -- --coverage && npm run synth"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@swc/core": "^1.16.2",
+    "@swc/jest": "^0.2.39",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "aws-cdk": "^2.150.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.11.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.9.9",
+    "react": "^18.3.1",
+    "typescript": "^5.5.0",
+    "typescript-eslint": "^8.70.1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.620.0",
+    "@aws-sdk/lib-dynamodb": "^3.620.0",
+    "aws-cdk-lib": "^2.150.0",
+    "constructs": "^10.3.0",
+    "ts-node": "^10.9.2",
+    "zod": "^4.6.5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

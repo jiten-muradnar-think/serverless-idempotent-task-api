@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      TABLE_NAME: ci-table
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Unit and infrastructure tests
+        run: npm test -- --ci --coverage
+
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+
+      - name: CDK synth
+        run: npx cdk synth --quiet
+
+      - name: Infrastructure diff against deployed stack
+        if: github.event_name == 'pull_request'
+        run: npx cdk diff || true
